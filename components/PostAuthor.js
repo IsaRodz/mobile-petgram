@@ -4,10 +4,10 @@ import RBSheet from 'react-native-raw-bottom-sheet';
 import UserInfo from './UserInfo';
 
 export default function PostAuthor({ author }) {
-  const sheetRef = useRef(null);
+  const bs = useRef(null);
 
   const handlePress = () => {
-    sheetRef.current.open();
+    bs.current.open();
   };
 
   return (
@@ -23,7 +23,7 @@ export default function PostAuthor({ author }) {
         </Pressable>
         <Text style={styles.authorEmail}>{author.email}</Text>
       </View>
-      <RBSheet ref={sheetRef} closeOnDragDown={true}>
+      <RBSheet ref={bs} closeOnDragDown={true}>
         <UserInfo userId={author.id} />
       </RBSheet>
     </View>
