@@ -1,16 +1,31 @@
-import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import React, { useRef } from 'react';
+import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
+import RBSheet from 'react-native-raw-bottom-sheet';
+import UserInfo from './UserInfo';
 
 export default function PostAuthor({ author }) {
+  const sheetRef = useRef(null);
+
+  const handlePress = () => {
+    sheetRef.current.open();
+  };
+
   return (
     <View style={styles.container}>
-      <Image style={styles.authorAvatar} source={{ uri: author.picture }} />
+      <Pressable onPress={() => handlePress()}>
+        <Image style={styles.authorAvatar} source={{ uri: author.picture }} />
+      </Pressable>
       <View>
-        <Text style={styles.authorName}>
-          {author.firstName} {author.lastName}
-        </Text>
+        <Pressable onPress={() => handlePress()}>
+          <Text style={styles.authorName}>
+            {author.firstName} {author.lastName}
+          </Text>
+        </Pressable>
         <Text style={styles.authorEmail}>{author.email}</Text>
       </View>
+      <RBSheet ref={sheetRef} closeOnDragDown={true}>
+        <UserInfo userId={author.id} />
+      </RBSheet>
     </View>
   );
 }

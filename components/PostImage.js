@@ -5,10 +5,13 @@ export default function PostImage({ image }) {
   return <Image source={{ uri: image }} style={styles.postImage} />;
 }
 
+const { width } = Dimensions.get('window');
+
 const styles = StyleSheet.create({
   postImage: {
-    width: null,
-    height: Dimensions.get('window').width,
+    width: width,
+    height: width,
     marginVertical: 8,
+    zIndex: 0,
   },
 });
