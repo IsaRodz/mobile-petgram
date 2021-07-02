@@ -3,6 +3,8 @@ import { StyleSheet, FlatList, View, Text, ActivityIndicator } from 'react-nativ
 import Comment from './Comment';
 import useFetch from '../hooks/useFetch';
 
+//  TODO: allow make a fake comment in the post
+
 export default function PostComments({ postId }) {
   const { result, loading, error } = useFetch(`/post/${postId}/comment`);
 
