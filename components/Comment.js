@@ -11,9 +11,7 @@ export default function Comment({ comment }) {
           {comment.owner.firstName} {comment.owner.lastName}
         </Text>
         <Text style={{ fontSize: 16 }}>{comment.message}</Text>
-        <Text style={{ color: '#7a7a7a', textTransform: 'uppercase' }}>
-          {format(comment.publishDate)}
-        </Text>
+        <Text style={{ color: '#7a7a7a' }}>{format(comment.publishDate)}</Text>
       </View>
     </View>
   );

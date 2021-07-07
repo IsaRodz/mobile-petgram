@@ -1,5 +1,14 @@
-import React from 'react';
-import { StyleSheet, FlatList, View, Text, ActivityIndicator } from 'react-native';
+import React, { useState } from 'react';
+import {
+  StyleSheet,
+  FlatList,
+  View,
+  Text,
+  TextInput,
+  Pressable,
+  ActivityIndicator,
+} from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import Comment from './Comment';
 import useFetch from '../hooks/useFetch';
 
@@ -20,39 +29,40 @@ export default function PostComments({ postId }) {
     );
   }
 
+  const listHeader = () => <Text style={styles.listHeader}>Comments</Text>;
+
+  const renderComment = ({ item }) => <Comment comment={item} />;
+
+  const emptyList = () => (
+    <View style={{ alignItems: 'center' }}>
+      <Text>Nobody commented this post</Text>
+    </View>
+  );
+
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <FlatList
-        ListHeaderComponent={() => (
-          <Text
-            style={{
-              marginTop: -10,
-              marginBottom: 16,
-              fontSize: 22,
-              fontWeight: 'bold',
-            }}
-          >
-            Comments
-          </Text>
-        )}
+        ListHeaderComponent={listHeader}
         data={result.data}
         keyExtractor={item => item.id}
-        renderItem={({ item }) => <Comment comment={item} />}
+        renderItem={renderComment}
         contentContainerStyle={styles.listContainer}
-        ListEmptyComponent={() => (
-          <View>
-            <Text>Nobody commented this post.</Text>
-            <Text>Be the first in comment</Text>
-          </View>
-        )}
+        ListEmptyComponent={emptyList}
       />
+      <View style={styles.inputContainer}>
+        <TextInput style={{ flex: 1 }} placeholder="Type a comment..." />
+        <Pressable onPress={() => alert('Sorry, no implemented yet')}>
+          <Ionicons name="send" size={24} />
+        </Pressable>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   listContainer: {
-    padding: 16,
+    paddingHorizontal: 16,
+    flexGrow: 1,
   },
   errorContainer: {
     padding: 20,
@@ -61,5 +71,17 @@ const styles = StyleSheet.create({
   errorText: {
     fontSize: 16,
     color: '#c4c4c4',
+  },
+  listHeader: {
+    marginBottom: 16,
+    fontSize: 22,
+    fontWeight: 'bold',
+  },
+  inputContainer: {
+    borderTopWidth: 1,
+    borderTopColor: '#f1f1f1',
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    flexDirection: 'row',
   },
 });

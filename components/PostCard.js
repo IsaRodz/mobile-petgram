@@ -8,13 +8,13 @@ import PostContent from './PostContent';
 import PostTags from './PostTags';
 import { format } from 'timeago.js';
 
-export default function PostCard({ post }) {
+export default function PostCard({ post, onPressTag }) {
   return (
     <View style={styles.postCard}>
       <PostAuthor author={post.owner} />
       <PostImage image={post.image} />
       <PostActions likes={post.likes} postId={post.id} />
-      <PostTags tags={post.tags} />
+      <PostTags tags={post.tags} onPress={onPressTag} />
       <PostContent author={post.owner} content={post.text} />
       <Text style={styles.date}>{format(post.publishDate)}</Text>
     </View>

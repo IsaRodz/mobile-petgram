@@ -1,13 +1,15 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Pressable } from 'react-native';
 
-export default function PostTags({ tags }) {
+export default function PostTags({ tags, onPress }) {
   return (
     <View style={styles.chipContainer}>
       {tags.map((tag, index) => (
-        <View style={styles.chip} key={index}>
-          <Text style={{ color: '#7a7a7a' }}>#{tag}</Text>
-        </View>
+        <Pressable onPress={() => onPress(tag)}>
+          <View style={styles.chip} key={index}>
+            <Text style={{ color: '#7a7a7a' }}>#{tag}</Text>
+          </View>
+        </Pressable>
       ))}
     </View>
   );

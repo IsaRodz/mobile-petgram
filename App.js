@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, ActivityIndicator, FlatList } from 'react-native';
 import Logo from './components/Logo';
 import PostCard from './components/PostCard';
 import useFetch from './hooks/useFetch';
 
 export default function App() {
-  const { result, loading, error } = useFetch('/post');
+  const [resource, setResource] = useState('/post');
+
+  const { result, loading, error } = useFetch(resource);
+
+  const handlePressTag = tag => {
+    setResource(`/tag/${tag}/post`);
+  };
+
+  const renderItem = ({ item }) => {
+    return <PostCard post={item} onPressTag={handlePressTag} />;
+  };
 
   if (loading) {
     return <ActivityIndicator size={45} color="black" style={{ margin: 70 }} />;
@@ -26,10 +36,6 @@ export default function App() {
     </View>
   );
 }
-
-const renderItem = ({ item }) => {
-  return <PostCard post={item} />;
-};
 
 const styles = StyleSheet.create({
   errorContainer: {

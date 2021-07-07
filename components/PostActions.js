@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { StyleSheet, Pressable, View, Text } from 'react-native';
+import { StyleSheet, Pressable, View, Text, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import PostComments from './PostComments';
