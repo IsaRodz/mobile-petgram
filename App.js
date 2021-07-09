@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, ActivityIndicator, FlatList } from 'react-native';
 import Logo from './components/Logo';
 import PostCard from './components/PostCard';
@@ -31,6 +32,7 @@ export default function App() {
 
   return (
     <View style={styles.feedContainer}>
+      <StatusBar style="auto" />
       <Logo />
       <FlatList data={result.data} renderItem={renderItem} />
     </View>
