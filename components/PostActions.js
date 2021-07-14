@@ -1,12 +1,11 @@
 import React, { useState, useRef } from 'react';
-import { StyleSheet, Pressable, View, Text, Dimensions } from 'react-native';
+import { StyleSheet, Pressable, View, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import RBSheet from 'react-native-raw-bottom-sheet';
-import PostComments from './PostComments';
+import { useNavigation } from '@react-navigation/native';
 
 export default function PostActions({ likes, postId }) {
   const [liked, setLiked] = useState(false);
-  const bs = useRef();
+  const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
@@ -18,15 +17,16 @@ export default function PostActions({ likes, postId }) {
             size={30}
           />
         </Pressable>
-        <Pressable style={styles.pressable} onPress={() => bs.current.open()}>
+        <Pressable
+          style={styles.pressable}
+          onPress={() => {
+            navigation.push('Comments', { postId });
+          }}
+        >
           <Ionicons name="chatbubble-outline" size={27} />
         </Pressable>
       </View>
       <Text style={styles.text}>Liked by {likes} people</Text>
-
-      <RBSheet ref={bs} closeOnDragDown={true}>
-        <PostComments postId={postId} />
-      </RBSheet>
     </View>
   );
 }

@@ -5,8 +5,8 @@ export default function PostTags({ tags, onPress }) {
   return (
     <View style={styles.chipContainer}>
       {tags.map((tag, index) => (
-        <Pressable onPress={() => onPress(tag)}>
-          <View style={styles.chip} key={index}>
+        <Pressable key={index} onPress={() => onPress(tag)}>
+          <View style={styles.chip}>
             <Text style={{ color: '#7a7a7a' }}>#{tag}</Text>
           </View>
         </Pressable>

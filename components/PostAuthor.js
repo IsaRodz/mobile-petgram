@@ -1,31 +1,27 @@
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
-import RBSheet from 'react-native-raw-bottom-sheet';
-import UserInfo from './UserInfo';
+import { useNavigation } from '@react-navigation/native';
 
 export default function PostAuthor({ author }) {
-  const bs = useRef(null);
+  const navigation = useNavigation();
 
-  const handlePress = () => {
-    bs.current.open();
+  const goToAuthorScreen = () => {
+    navigation.push('Profile', { userId: author.id });
   };
 
   return (
     <View style={styles.container}>
-      <Pressable onPress={() => handlePress()}>
+      <Pressable onPress={goToAuthorScreen}>
         <Image style={styles.authorAvatar} source={{ uri: author.picture }} />
       </Pressable>
       <View>
-        <Pressable onPress={() => handlePress()}>
+        <Pressable onPress={goToAuthorScreen}>
           <Text style={styles.authorName}>
             {author.firstName} {author.lastName}
           </Text>
         </Pressable>
         <Text style={styles.authorEmail}>{author.email}</Text>
       </View>
-      <RBSheet ref={bs} closeOnDragDown={true}>
-        <UserInfo userId={author.id} />
-      </RBSheet>
     </View>
   );
 }

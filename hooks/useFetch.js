@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 axios.defaults.baseURL = 'https://dummyapi.io/data/api/';
-axios.defaults.headers['app-id'] = '60db7f481343794e0380a3b7'; // '60db7dd5d9220180ef16aa9d';
+axios.defaults.headers['app-id'] = '60db7dd5d9220180ef16aa9d';
 // 60db7f481343794e0380a3b7
 
 export default function useFetch(resource) {
@@ -22,6 +22,7 @@ export default function useFetch(resource) {
       }
     } catch (e) {
       setError(true);
+      console.log({ e });
     } finally {
       setLoading(false);
     }

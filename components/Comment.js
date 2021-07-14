@@ -20,7 +20,11 @@ export default function Comment({ comment }) {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    marginBottom: 16,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    backgroundColor: '#fff',
+    borderColor: '#F8F8F8',
+    borderBottomWidth: 1,
   },
   avatar: {
     width: 24,
